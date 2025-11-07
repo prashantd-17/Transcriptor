@@ -1,0 +1,63 @@
+// .container {
+//   max-width: 600px;
+//   margin: 2rem auto;
+//   font-family: 'Inter', sans-serif;
+
+//   .controls {
+//     display: flex;
+//     justify-content: space-between;
+//     gap: 10px;
+//     margin-bottom: 1rem;
+//   }
+
+//   textarea {
+//     width: 100%;
+//     height: 120px;
+//     padding: 10px;
+//     font-size: 1rem;
+//     border-radius: 6px;
+//     border: 1px solid #ccc;
+//   }
+
+//   .output, .suggestions {
+//     margin-top: 1rem;
+//     padding: 10px;
+//     background: #f9f9f9;
+//     border-radius: 8px;
+//   }
+
+//   .suggestions p {
+//     cursor: pointer;
+//     margin: 3px 0;
+//     padding: 5px;
+//     border-radius: 4px;
+//     background: #eee;
+//     &:hover {
+//       background: #ddd;
+//     }
+//   }
+// }
+
+
+.container-fluid{
+  height: 100vh;
+  padding: 0px;
+}
+
+.main-bg{
+  background-color: #f3f2f2;
+}
+
+textarea{
+  resize: auto;
+}
+
+.input-container{
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+}
+
+.w-165{
+  width: 250px;
+}

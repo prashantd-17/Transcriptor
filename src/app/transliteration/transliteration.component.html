@@ -1,0 +1,91 @@
+<!-- <div class="container-fluid main-bg">
+  <nav class="container">
+    <h1>Transcriptor AI</h1>
+  </nav>
+
+
+<div class="container">
+  <h2>Transkriptr 🌍</h2>
+
+  <div class="controls"> -->
+    <!-- <div>
+      <label for="mode">Mode:</label>
+      <select id="mode" [(ngModel)]="mode">
+        <option value="transliteration">Transliteration</option>
+        <option value="translation">Translation</option>
+      </select>
+    </div> -->
+
+    <!-- <div>
+      <label for="lang">Language:</label>
+      <select id="lang" [(ngModel)]="language">
+        <option *ngFor="let lang of languages" [value]="lang.code">
+          {{ lang.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <textarea
+    [(ngModel)]="inputText"
+    (input)="onInputChange()"
+    placeholder="Type here..."
+  ></textarea>
+
+  <div class="output" *ngIf="outputText">
+    <h4>Output:</h4>
+    <p>{{ outputText }}</p>
+  </div>
+
+  <div class="suggestions" *ngIf="suggestions.length">
+    <h4>Suggestions:</h4>
+    <p *ngFor="let s of suggestions" (click)="useSuggestion(s)">
+      {{ s }}
+    </p>
+  </div>
+</div>
+
+</div> -->
+
+<div class="container-fluid main-bg">
+  <nav class="bg-white p-3">
+    <div class="container">
+      <h3>Transcriptor AI</h3>
+    </div>
+  </nav>
+
+  <div class="container mt-5 mb-5">
+    <h2 class="text-center">Instant Text Transcription</h2>
+    <p class="text-center">Powered by advance AI. Select a language, type or paste your text, and get <br> accurate
+      transcriptions in seconds.</p>
+  </div>
+
+  <div class="container input-container">
+    <select class="form-select mb-3 w-165" [(ngModel)]="language">
+  <option selected>Select Language</option>
+ <option *ngFor="let lang of languages" [value]="lang.code">
+          {{ lang.name }}
+        </option>
+      </select>
+
+    <div class="input-group">
+      <textarea [(ngModel)]="inputText" (input)="onInputChange()" placeholder="Type here..." name="input-box" rows="10"
+        class="form-control" aria-label="With textarea"></textarea>
+    </div>
+
+    <div class="output mt-3" *ngIf="outputText">
+      <p>{{ outputText }}</p>
+    </div>
+ <!-- 
+  <div class="suggestions" *ngIf="suggestions.length">
+    <h4>Suggestions:</h4>
+    <p *ngFor="let s of suggestions" (click)="useSuggestion(s)">
+      {{ s }}
+    </p>
+  </div> -->
+
+
+  </div>
+</div>
+
+
