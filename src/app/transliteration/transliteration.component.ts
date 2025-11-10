@@ -14,7 +14,7 @@ import { LANGUAGES } from '../language';
 })
 export class TransliterationComponent {
   languages = LANGUAGES;
-  language = 'hi';
+  language = '';
   inputText = '';
   outputText = '';
   suggestions: string[] = [];

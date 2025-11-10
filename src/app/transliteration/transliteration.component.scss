@@ -61,3 +61,21 @@ textarea{
 .w-165{
   width: 250px;
 }
+
+.input-bg{
+  background-color: #f9f9f9;
+}
+
+.input-bg:focus {
+  border-color: #5d00ff !important; /* purple outline */
+  box-shadow: 0 0 0 0.25rem rgba(126, 87, 194, 0.25) !important; /* subtle glow */
+  outline: none !important;
+}
+
+.box-shadow{
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.error{
+  border: 1px solid #5d00ff;
+}

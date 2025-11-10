@@ -49,7 +49,8 @@
 
 <div class="container-fluid main-bg">
   <nav class="bg-white p-3">
-    <div class="container">
+    <div class="container d-flex align-items-center">
+      <img height="100" src="../../assets/logo.png" alt="">
       <h3>Transcriptor AI</h3>
     </div>
   </nav>
@@ -60,17 +61,17 @@
       transcriptions in seconds.</p>
   </div>
 
-  <div class="container input-container">
-    <select class="form-select mb-3 w-165" [(ngModel)]="language">
-  <option selected>Select Language</option>
+  <div class="container input-container box-shadow">
+    <select class="form-select mb-3 w-165 input-bg" [(ngModel)]="language">
+  <option value="" disabled selected>🌐 Select Language</option>
  <option *ngFor="let lang of languages" [value]="lang.code">
           {{ lang.name }}
         </option>
       </select>
 
     <div class="input-group">
-      <textarea [(ngModel)]="inputText" (input)="onInputChange()" placeholder="Type here..." name="input-box" rows="10"
-        class="form-control" aria-label="With textarea"></textarea>
+      <textarea [(ngModel)]="inputText" [class.error]="!language" [disabled]="!language" (input)="onInputChange()" placeholder="Type here..." name="input-box" rows="10"
+        class="form-control input-bg" aria-label="With textarea"></textarea>
     </div>
 
     <div class="output mt-3" *ngIf="outputText">
