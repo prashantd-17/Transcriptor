@@ -1,83 +1,59 @@
-<!-- <div class="container-fluid main-bg">
-  <nav class="container">
-    <h1>Transcriptor AI</h1>
-  </nav>
-
-
-<div class="container">
-  <h2>Transkriptr 🌍</h2>
-
-  <div class="controls"> -->
-    <!-- <div>
-      <label for="mode">Mode:</label>
-      <select id="mode" [(ngModel)]="mode">
-        <option value="transliteration">Transliteration</option>
-        <option value="translation">Translation</option>
-      </select>
-    </div> -->
-
-    <!-- <div>
-      <label for="lang">Language:</label>
-      <select id="lang" [(ngModel)]="language">
-        <option *ngFor="let lang of languages" [value]="lang.code">
-          {{ lang.name }}
-        </option>
-      </select>
-    </div>
-  </div>
-
-  <textarea
-    [(ngModel)]="inputText"
-    (input)="onInputChange()"
-    placeholder="Type here..."
-  ></textarea>
-
-  <div class="output" *ngIf="outputText">
-    <h4>Output:</h4>
-    <p>{{ outputText }}</p>
-  </div>
-
-  <div class="suggestions" *ngIf="suggestions.length">
-    <h4>Suggestions:</h4>
-    <p *ngFor="let s of suggestions" (click)="useSuggestion(s)">
-      {{ s }}
-    </p>
-  </div>
-</div>
-
-</div> -->
-
 <div class="container-fluid main-bg">
-  <nav class="bg-white p-3">
+  <nav class="bg-white p-3 d-flex align-items-center">
     <div class="container d-flex align-items-center">
-      <img height="100" src="../../assets/logo.png" alt="">
-      <h3>Transcriptor AI</h3>
+      <img height="70" src="../../assets/logo.png" alt="">
+
+      <h3>TextFusion AI</h3>
+    </div>
+    <div>
+      <ul class="list m-0 p-0 d-flex">
+        <li class="d-flex align-items-center gap-1 tab-item" (click)="isTranscriptionVisible = true"> <svg
+            xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            [attr.fill]="isTranscriptionVisible ? '#5d00ff' : 'currentColor'" style="margin-bottom: 3px;">
+            <path
+              d="M5 1a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h10a2 2 0 0 0 2-2V6.8L11.2 1H5zm6 6V2.5L16.5 8H12a1 1 0 0 1-1-1z" />
+            <path d="M6 11h8v1H6v-1zm0 2h8v1H6v-1zm0-4h5v1H6V9z" />
+          </svg>
+          <span [class.active]="isTranscriptionVisible">Transcription</span>
+        </li>
+        <li class="d-flex align-items-center gap-1 tab-item" (click)="isTranscriptionVisible = false"> <svg
+            xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            [attr.fill]="isTranscriptionVisible ? 'currentColor' : '#5d00ff'" style="margin-bottom: 3px;">
+            <path
+              d="M4.5 4a.5.5 0 0 0 0 1h3.6l-2.37 6.16a.5.5 0 1 0 .94.36L7.16 5h1.94L7.7 8.5h2.03a.5.5 0 0 0 0-1H9.36l1.03-2.5h1.61a.5.5 0 0 0 0-1H4.5z" />
+            <path
+              d="M11.5 10.5a.5.5 0 0 0-.47.31L7.53 19a.5.5 0 1 0 .94.37L10 16h5l1.53 3.69a.5.5 0 0 0 .94-.38l-3.5-8.5a.5.5 0 0 0-.47-.31h-2zM13.38 15H10.6l1.38-3.31L13.38 15z" />
+          </svg>
+          <span [class.active]="!isTranscriptionVisible">Translation</span>
+        </li>
+      </ul>
     </div>
   </nav>
 
-  <div class="container mt-5 mb-5">
+  <div class="container mt-5 mb-5" *ngIf="isTranscriptionVisible">
     <h2 class="text-center">Instant Text Transcription</h2>
     <p class="text-center">Powered by advance AI. Select a language, type or paste your text, and get <br> accurate
       transcriptions in seconds.</p>
   </div>
 
-  <div class="container input-container box-shadow">
+  <div class="container input-container box-shadow" *ngIf="isTranscriptionVisible">
     <select class="form-select mb-3 w-165 input-bg" [(ngModel)]="language">
-  <option value="" disabled selected>🌐 Select Language</option>
- <option *ngFor="let lang of languages" [value]="lang.code">
-          {{ lang.name }}
-        </option>
-      </select>
+      <option value="" disabled selected>🌐 Select Language</option>
+      <option *ngFor="let lang of languages" [value]="lang.code">
+        {{ lang.name }}
+      </option>
+    </select>
 
     <div class="input-group">
-      <textarea [(ngModel)]="inputText" [class.error]="!language" [disabled]="!language" (input)="onInputChange()" placeholder="Type here..." name="input-box" rows="10"
-        class="form-control input-bg" aria-label="With textarea"></textarea>
+      <textarea [(ngModel)]="inputText" [class.error]="!language" [disabled]="!language" (input)="onInputChange()"
+        placeholder="Type here..." name="input-box" rows="10" class="form-control input-bg"
+        aria-label="With textarea"></textarea>
     </div>
 
     <div class="output mt-3" *ngIf="outputText">
       <p>{{ outputText }}</p>
     </div>
- <!-- 
+    <!-- 
   <div class="suggestions" *ngIf="suggestions.length">
     <h4>Suggestions:</h4>
     <p *ngFor="let s of suggestions" (click)="useSuggestion(s)">
@@ -87,6 +63,51 @@
 
 
   </div>
+
+  <div class="container mt-5 mb-5" *ngIf="!isTranscriptionVisible">
+    <h2 class="text-center">Instant Text Translation</h2>
+    <p class="text-center"> Powered by advanced AI. Choose your source and target languages, type or paste your text,
+      <br>
+      and get accurate translations in real time.</p>
+  </div>
+
+  <div class="container input-container box-shadow" *ngIf="!isTranscriptionVisible">
+    <div class="row mb-3">
+      <div class="col-md-6 mb-2">
+       <select [(ngModel)]="sourceLang" class="form-select input-bg">
+          <option *ngFor="let lang of languages" [value]="lang.code">
+            {{ lang.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-2">
+       <select [(ngModel)]="targetLang" class="form-select input-bg">
+          <option *ngFor="let lang of languages" [value]="lang.code">
+            {{ lang.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Enter Text</label>
+      <textarea [(ngModel)]="text" class="form-control input-bg" rows="3" placeholder="Type text to translate...">
+        </textarea>
+    </div>
+
+    <div class="d-grid mb-3">
+      <button (click)="translate()" class="btn btn-primary" [disabled]="loading">
+        <span *ngIf="!loading">Translate</span>
+        <span *ngIf="loading">
+          <span class="spinner-border spinner-border-sm"></span> Translating...
+        </span>
+      </button>
+    </div>
+
+    <div *ngIf="translatedText" class="alert alert-success mt-3">
+      <strong>Translated Text:</strong>
+      <p class="mt-2 mb-0 fs-5">{{ translatedText }}</p>
+    </div>
+  </div>
 </div>
-
-

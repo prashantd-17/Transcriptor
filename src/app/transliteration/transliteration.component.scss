@@ -79,3 +79,59 @@ textarea{
 .error{
   border: 1px solid #5d00ff;
 }
+
+.list{
+  list-style-type: none;
+}
+
+.list li{
+  padding: 0px 10px;
+  cursor: pointer;
+}
+
+.active{
+  color: #5d00ff;
+  font-weight: bold;
+}
+
+.tab-item {
+  position: relative;
+  cursor: pointer;
+  padding-bottom: 4px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.tab-item:hover {
+  color: #7e00ff;
+  transform: translateY(-2px);
+}
+
+/* Unique active animation */
+.tab-item.active {
+  color: #5d00ff;
+  font-weight: 600;
+  transform: translateY(-2px);
+}
+
+/* Animated underline */
+.tab-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #5d00ff, #9a37ff);
+  border-radius: 2px;
+  transition: width 0.35s ease;
+}
+
+/* When active — underline appears */
+.tab-item.active::after {
+  width: 100%;
+}
+
+/* Glow effect on active */
+.tab-item.active {
+  text-shadow: 0 0 8px rgba(93, 0, 255, 0.35);
+}

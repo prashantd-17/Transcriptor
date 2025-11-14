@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransliterationService {
+  // private backendUrl = 'http://localhost:3000/api/translate'; // your Node server
+  private backendUrl = 'https://thumbnail-backend-g1bn.onrender.com/api/translate'; // your Node server
 
    constructor(private http: HttpClient) {}
 
@@ -34,9 +37,16 @@ export class TransliterationService {
   // }
 
   translate(text: string, source: string, target: string) {
-  const url = 'http://localhost:5000/api/translate';
+  // const url = 'http://localhost:3000/api/translate';
+  const url = 'https://thumbnail-backend-g1bn.onrender.com/api/translate';
   const body = { q: text, source, target, format: 'text' };
   return this.http.post<any>(url, body);
 }
+
+
+   translateText(text: string, source: string, target: string): Observable<any> {
+    const body = { q: text, source, target };
+    return this.http.post(this.backendUrl, body);
+  }
 
 }

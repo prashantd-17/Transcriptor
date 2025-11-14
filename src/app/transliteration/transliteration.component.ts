@@ -20,6 +20,14 @@ export class TransliterationComponent {
   suggestions: string[] = [];
   mode: 'transliteration' | 'translation' = 'transliteration';
 
+  text = '';
+  translatedText = '';
+  sourceLang = 'en';
+  targetLang = 'hi';
+  loading = false;
+
+  isTranscriptionVisible = true;
+
   private inputSubject = new Subject<string>();
 
   constructor(private translitService: TransliterationService) {
@@ -54,4 +62,25 @@ export class TransliterationComponent {
     this.outputText = s;
     this.suggestions = [];
   }
+
+
+
+  translate() {
+    if (!this.text.trim()) return;
+
+    this.loading = true;
+    this.translitService.translateText(this.text, this.sourceLang, this.targetLang)
+      .subscribe({
+        next: (res: any) => {
+          this.translatedText = res.translatedText;
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error(err);
+          this.translatedText = 'Translation failed. Try again later.';
+          this.loading = false;
+        }
+      });
+  }
+
 }
