@@ -7,16 +7,7 @@
     </div>
     <div>
       <ul class="list m-0 p-0 d-flex">
-        <li class="d-flex align-items-center gap-1 tab-item" (click)="isTranscriptionVisible = true"> <svg
-            xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-            [attr.fill]="isTranscriptionVisible ? '#5d00ff' : 'currentColor'" style="margin-bottom: 3px;">
-            <path
-              d="M5 1a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h10a2 2 0 0 0 2-2V6.8L11.2 1H5zm6 6V2.5L16.5 8H12a1 1 0 0 1-1-1z" />
-            <path d="M6 11h8v1H6v-1zm0 2h8v1H6v-1zm0-4h5v1H6V9z" />
-          </svg>
-          <span [class.active]="isTranscriptionVisible">Transcription</span>
-        </li>
-        <li class="d-flex align-items-center gap-1 tab-item" (click)="isTranscriptionVisible = false"> <svg
+         <li class="d-flex align-items-center gap-1 tab-item" (click)="isTranscriptionVisible = false"> <svg
             xmlns="http://www.w3.org/2000/svg" width="20" height="20"
             [attr.fill]="isTranscriptionVisible ? 'currentColor' : '#5d00ff'" style="margin-bottom: 3px;">
             <path
@@ -25,6 +16,15 @@
               d="M11.5 10.5a.5.5 0 0 0-.47.31L7.53 19a.5.5 0 1 0 .94.37L10 16h5l1.53 3.69a.5.5 0 0 0 .94-.38l-3.5-8.5a.5.5 0 0 0-.47-.31h-2zM13.38 15H10.6l1.38-3.31L13.38 15z" />
           </svg>
           <span [class.active]="!isTranscriptionVisible">Translation</span>
+        </li>
+        <li class="d-flex align-items-center gap-1 tab-item" (click)="isTranscriptionVisible = true"> <svg
+            xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            [attr.fill]="isTranscriptionVisible ? '#5d00ff' : 'currentColor'" style="margin-bottom: 3px;">
+            <path
+              d="M5 1a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h10a2 2 0 0 0 2-2V6.8L11.2 1H5zm6 6V2.5L16.5 8H12a1 1 0 0 1-1-1z" />
+            <path d="M6 11h8v1H6v-1zm0 2h8v1H6v-1zm0-4h5v1H6V9z" />
+          </svg>
+          <span [class.active]="isTranscriptionVisible">Transcription</span>
         </li>
       </ul>
     </div>
@@ -90,10 +90,15 @@
       </div>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 pos-rel">
       <label class="form-label fw-semibold">Enter Text</label>
       <textarea [(ngModel)]="text" class="form-control input-bg" rows="3" placeholder="Type text to translate...">
-        </textarea>
+      </textarea>
+      <button class="mic-btn pos-abs b-0" (click)="startSpeechToText()" [class.listening]="isListening">
+        <svg viewBox="-3 0 19 19" xmlns="http://www.w3.org/2000/svg" class="mic-icon">
+          <path d="M11.665 7.915v1.31a5.257 5.257 0 0 1-1.514 3.694 5.174 5.174 0 0 1-1.641 1.126 5.04 5.04 0 0 1-1.456.384v1.899h2.312a.554.554 0 0 1 0 1.108H3.634a.554.554 0 0 1 0-1.108h2.312v-1.899a5.045 5.045 0 0 1-1.456-.384 5.174 5.174 0 0 1-1.641-1.126 5.257 5.257 0 0 1-1.514-3.695v-1.31a.554.554 0 1 1 1.109 0v1.31a4.131 4.131 0 0 0 1.195 2.917 3.989 3.989 0 0 0 5.722 0 4.133 4.133 0 0 0 1.195-2.917v-1.31a.554.554 0 1 1 1.109 0zM3.77 10.37a2.875 2.875 0 0 1-.233-1.146V4.738A2.905 2.905 0 0 1 3.77 3.58a3 3 0 0 1 1.59-1.59 2.902 2.902 0 0 1 1.158-.233 2.865 2.865 0 0 1 1.152.233 2.977 2.977 0 0 1 1.793 2.748l-.012 4.487a2.958 2.958 0 0 1-.856 2.09 3.025 3.025 0 0 1-.937.634 2.865 2.865 0 0 1-1.152.233 2.905 2.905 0 0 1-1.158-.233A2.957 2.957 0 0 1 3.77 10.37z"></path>
+        </svg>
+      </button>
     </div>
 
     <div class="d-grid mb-3">
@@ -107,7 +112,10 @@
 
     <div *ngIf="translatedText" class="alert alert-success mt-3">
       <strong>Translated Text:</strong>
-      <p class="mt-2 mb-0 fs-5">{{ translatedText }}</p>
+      <p class="mt-2 mb-0 fs-5 mb-3">{{ translatedText }}</p>
+       <button class="p-2 btn btn-light d-flex gap-1 align-items-center" (click)="speakTranslatedText()">
+        <svg fill="#000000" viewBox="-3 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M11.665 7.915v1.31a5.257 5.257 0 0 1-1.514 3.694 5.174 5.174 0 0 1-1.641 1.126 5.04 5.04 0 0 1-1.456.384v1.899h2.312a.554.554 0 0 1 0 1.108H3.634a.554.554 0 0 1 0-1.108h2.312v-1.899a5.045 5.045 0 0 1-1.456-.384 5.174 5.174 0 0 1-1.641-1.126 5.257 5.257 0 0 1-1.514-3.695v-1.31a.554.554 0 1 1 1.109 0v1.31a4.131 4.131 0 0 0 1.195 2.917 3.989 3.989 0 0 0 5.722 0 4.133 4.133 0 0 0 1.195-2.917v-1.31a.554.554 0 1 1 1.109 0zM3.77 10.37a2.875 2.875 0 0 1-.233-1.146V4.738A2.905 2.905 0 0 1 3.77 3.58a3 3 0 0 1 1.59-1.59 2.902 2.902 0 0 1 1.158-.233 2.865 2.865 0 0 1 1.152.233 2.977 2.977 0 0 1 1.793 2.748l-.012 4.487a2.958 2.958 0 0 1-.856 2.09 3.025 3.025 0 0 1-.937.634 2.865 2.865 0 0 1-1.152.233 2.905 2.905 0 0 1-1.158-.233A2.957 2.957 0 0 1 3.77 10.37z"></path></g></svg>
+      </button>
     </div>
   </div>
 </div>
