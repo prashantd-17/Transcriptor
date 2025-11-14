@@ -126,12 +126,16 @@ localeMap: any = {
   zu: "zu-ZA",
 };
 
+isMobile:boolean = false;
+menuOpen = false;
 
   constructor(private translitService: TransliterationService) {
     this.inputSubject.pipe(debounceTime(400)).subscribe(text => this.processInput(text));
   }
 
   ngOnInit(): void {
+    this.isMobile = this.isMobileView();
+    console.log(this.isMobile)
      const SpeechRecognition =
     (window as any).SpeechRecognition ||
     (window as any).webkitSpeechRecognition;
@@ -231,4 +235,16 @@ startSpeechToText() {
   this.recognition.onerror = () => (this.isListening = false);
   this.recognition.onend = () => (this.isListening = false);
 }
+
+ getWindow(): Window | null {
+    if (typeof window !== 'undefined') {
+      return window;
+    }
+    return null;
+  }
+
+  isMobileView(): boolean {
+    const width = this.getWindow()?.innerWidth ?? 1024;
+    return width < 576;
+  }
 }
